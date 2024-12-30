@@ -1,5 +1,5 @@
 import { Address } from '../valueObjects/Address'
-import { Entity } from '../base/Entity'
+import { EntityHash } from '../base/EntityHash'
 import { Hash } from '../valueObjects/Hash'
 
 interface TransactionProps {
@@ -8,7 +8,7 @@ interface TransactionProps {
   to?: Address | undefined 
 }
 
-export class Transaction extends Entity<TransactionProps> {
+export class Transaction extends EntityHash<TransactionProps> {
   private constructor(props: TransactionProps, hash: Hash) {
     super(props, hash)
   }

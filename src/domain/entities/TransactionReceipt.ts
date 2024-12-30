@@ -1,12 +1,12 @@
+import { EntityHash } from '../base/EntityHash'
 import { Address } from '../valueObjects/Address'
-import { Entity } from '../base/Entity'
 import { Hash } from '../valueObjects/Hash'
 
 interface TransactionReceiptProps {
   contractAddress?: Address
 }
 
-export class TransactionReceipt extends Entity<TransactionReceiptProps> {
+export class TransactionReceipt extends EntityHash<TransactionReceiptProps> {
   private constructor(props: TransactionReceiptProps, hash: Hash) {
     super(props, hash)
   }

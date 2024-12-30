@@ -77,7 +77,7 @@ export class ViemChainRepository implements ChainRepository {
     const toBlock = await this.client.getBlockNumber()
     const fromBlock = toBlock - blockDiff
 
-    for (let currentBlock = fromBlock; currentBlock <= toBlock; currentBlock += 1n) {
+    for (let currentBlock = fromBlock; currentBlock <= toBlock; currentBlock += BigInt(1)) {
       const blockTransactions =
         await this.getContractCreationTransactionsByBlock(currentBlock)
 

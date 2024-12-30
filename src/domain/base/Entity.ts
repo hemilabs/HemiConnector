@@ -1,11 +1,11 @@
-import { Hash } from '../valueObjects/Hash'
+import { Uuid } from '../valueObjects/Uuid'
 import { ValueObject } from "./ValueObject"
 
 export class Entity<T> extends ValueObject<T> {
-  hash: Hash
+  id: Uuid
 
-  protected constructor(props: T, hash: Hash) {
+  protected constructor(props: T, id: Uuid) {
     super(props)
-    this.hash = hash
+    this.id = id
   }
 }

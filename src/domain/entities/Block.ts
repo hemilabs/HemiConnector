@@ -1,5 +1,5 @@
 import { Hash } from '../valueObjects/Hash'
-import { Entity } from '../base/Entity'
+import { EntityHash } from '../base/EntityHash'
 import { Transaction } from './Transaction'
 import { BlockNumber } from '../valueObjects/BlockNumber'
 
@@ -8,7 +8,7 @@ interface BlockProps {
   transactions: Array<Transaction>
 }
 
-export class Block extends Entity<BlockProps> {
+export class Block extends EntityHash<BlockProps> {
   private constructor(props: BlockProps, hash: Hash) {
     super(props, hash)
   }

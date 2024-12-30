@@ -31,7 +31,7 @@ export class GivePointsToContractCreationUsecase {
     const toBlock = blockNumber.value
     const fromBlock = toBlock - blockDiff
 
-    for (let currentBlock = fromBlock; currentBlock <= toBlock; currentBlock += 1n) {
+    for (let currentBlock = fromBlock; currentBlock <= toBlock; currentBlock += BigInt(1)) {
       console.info(`--------------------------------------------------------`)
       console.info(`Hemi Connector | Current block number: ${currentBlock}`)
 

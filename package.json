@@ -7,18 +7,21 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "give-points": "bun ./src/presentation/cli/GivePoints.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "build": "tsc -p ./tsconfig.build.json",
+    "collect-metrics": "node --experimental-specifier-resolution=node dist/presentation/cli/CollectMetrics.js",
+    "give-points": "bun ./src/presentation/cli/GivePoints.ts"
   },
   "author": "Thomas Alvarenga (thomas@bloq.com)",
   "license": "MIT",
   "dependencies": {
     "hemi-viem": "^1.1.0",
     "typescript": "^5.6.3",
+    "uuid": "^11.0.3",
     "viem": "^2.17.3",
     "web3": "^4.14.0"
   },

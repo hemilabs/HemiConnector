@@ -1,5 +1,5 @@
 import { Hash } from '../valueObjects/Hash'
-import { Entity } from '../base/Entity'
+import { EntityHash } from '../base/EntityHash'
 import { Address } from '../valueObjects/Address'
 
 interface ScoreProps {
@@ -7,7 +7,7 @@ interface ScoreProps {
   amount: number
 }
 
-export class Score extends Entity<ScoreProps> {
+export class Score extends EntityHash<ScoreProps> {
   private constructor(props: ScoreProps, hash: Hash) {
     super(props, hash)
   }
@@ -17,10 +17,10 @@ export class Score extends Entity<ScoreProps> {
   }
   
   get address(): Address {
-    return this.address
+    return this.props.address
   }
 
   get amount(): number {
-    return this.amount
+    return this.props.amount
   }
 }
