@@ -19,7 +19,8 @@ const execute = async (): Promise<void> => {
       client.getBlockNumber(),
       fetch(
         `${blockExplorerUrl}/api/v2/stats`)
-        .then(async response => await response.json())
+        // eslint-disable-next-line @typescript-eslint/promise-function-async
+        .then(response => response.json())
     ])
 
     const totalTransactions = parseInt(stats.total_transactions)
