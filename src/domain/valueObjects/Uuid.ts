@@ -15,7 +15,7 @@ export class Uuid extends ValueObject<UuidProps> {
       throw new InvalidUuidError()
     }
 
-    return new Uuid(id || v4())
+    return new Uuid(id ?? v4())
   }
 
   get value(): string {

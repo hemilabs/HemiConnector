@@ -16,7 +16,7 @@ export class File extends Entity<FileProps> {
   static create(props: FileProps): File {
     return new File(props)
   }
-  
+
   get name(): string {
     return this.props.name.value
   }

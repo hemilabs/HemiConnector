@@ -1,5 +1,5 @@
 import { Uuid } from '../valueObjects/Uuid'
-import { ValueObject } from "./ValueObject"
+import { ValueObject } from './ValueObject'
 
 export class Entity<T> extends ValueObject<T> {
   id: Uuid

@@ -1,15 +1,15 @@
-import { describe, it, expect } from "vitest"
-import { Entity } from "./EntityHash"
-import { ValueObject } from "./ValueObject"
-import { Hash } from '../valueObjects/Hash'
+import { describe, it, expect } from 'vitest'
+import { Entity } from './Entity'
+import { ValueObject } from './ValueObject'
+import { Uuid } from '../valueObjects/Uuid'
 
 interface TestProps {
   value: string
 }
 
 class TestEntity extends Entity<TestProps> {
-  static create(props: TestProps, hash: Hash): TestEntity {
-    return new TestEntity(props, hash)
+  static create(props: TestProps, id: Uuid): TestEntity {
+    return new TestEntity(props, id)
   }
 
   get value(): string {
@@ -17,29 +17,25 @@ class TestEntity extends Entity<TestProps> {
   }
 }
 
-const hash = Hash.create('0x7304dc174aab2bc487b1befb9e35ba3632b9693f0c0548e138b4401f263910f1')
+const id = Uuid.create()
 
-describe("src/domain/Entity", () => {
-  it("should be defined", () => {
-    expect(Entity).toBeDefined()
-  })
-
-  it("should be instance of ValueObject", () => {
-    const entity = TestEntity.create({ value: "test" }, hash)
+describe('src/domain/Entity', () => {
+  it('should be instance of ValueObject', () => {
+    const entity = TestEntity.create({ value: 'test' }, id)
 
     expect(entity).toBeInstanceOf(ValueObject)
   })
 
-  it("should generate a new hash if none is passed to constructor", () => {
-    const entity = TestEntity.create({ value: "test" }, hash)
+  it('should generate a new id if none is passed to constructor', () => {
+    const entity = TestEntity.create({ value: 'test' }, id)
 
-    expect(entity.hash).toBeDefined()
+    expect(entity.id).toBeDefined()
   })
 
-  it("should set the hash if it was passed to constructor", () => {
-    const expectedId = hash
-    const entity = TestEntity.create({ value: "test" }, expectedId)
+  it('should set the id if it was passed to constructor', () => {
+    const expectedId = id
+    const entity = TestEntity.create({ value: 'test' }, expectedId)
 
-    expect(entity.hash).toBe(expectedId)
+    expect(entity.id).toBe(expectedId)
   })
 })

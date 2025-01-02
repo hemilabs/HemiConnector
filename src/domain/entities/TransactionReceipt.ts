@@ -11,7 +11,10 @@ export class TransactionReceipt extends EntityHash<TransactionReceiptProps> {
     super(props, hash)
   }
 
-  static create(props: TransactionReceiptProps, hash: Hash): TransactionReceipt {
+  static create(
+    props: TransactionReceiptProps,
+    hash: Hash
+  ): TransactionReceipt {
     return new TransactionReceipt(props, hash)
   }
 

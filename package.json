@@ -6,16 +6,16 @@
   "types": "dist/index.d.ts",
   "private": true,
   "scripts": {
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
-    "test": "vitest run",
-    "test:cov": "vitest run --coverage",
-    "test:watch": "vitest watch",
     "build": "tsc -p ./tsconfig.build.json",
     "collect-metrics": "node dist/presentation/cli/CollectMetrics.js",
-    "give-points": "node ./src/presentation/cli/GivePoints.ts"
+    "give-points": "node ./src/presentation/cli/GivePoints.ts",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "vitest run",
+    "test:cov": "vitest run --coverage",
+    "test:watch": "vitest watch"
   },
-  "author": "Thomas Alvarenga (thomas@hemi.xyz)",
+  "author": "Thomas Alvarenga <thomas@hemi.xyz>",
   "license": "MIT",
   "dependencies": {
     "hemi-viem": "1.7.0",

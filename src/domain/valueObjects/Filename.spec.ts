@@ -6,10 +6,6 @@ import { InvalidFilenameError } from '../errors/InvalidFilenameError'
 describe('src/domain/valueObjects/Filename', () => {
   const validFilename = 'metrics.json'
 
-  it('should be defined', () => {
-    expect(Filename).toBeDefined()
-  })
-
   it('should be an instance of ValueObject', () => {
     const filename = Filename.create(validFilename)
 

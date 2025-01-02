@@ -6,10 +6,6 @@ import { ValueObject } from '../base/ValueObject'
 describe('src/domain/valueObjects/Address', () => {
   const validAddress = '0x52908400098527886E0F7030069857D2E4169EE7'
 
-  it('should be defined', () => {
-    expect(Address).toBeDefined()
-  })
-
   it('should be an instance of ValueObject', () => {
     const address = Address.create(validAddress)
 

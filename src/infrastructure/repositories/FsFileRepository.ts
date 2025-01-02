@@ -4,16 +4,16 @@ import { FileRepository } from '../../domain/repositories/FileRepository'
 import { File } from '../../domain/entities/File'
 
 export class FsFileRepository implements FileRepository {
-  private folderPath: string
+  private readonly folderPath: string
 
   constructor() {
-    this.folderPath = process.env['METRICS_FOLDER_PATH'] || ''
+    this.folderPath = process.env['METRICS_FOLDER_PATH'] ?? ''
   }
 
-  save(file: File): Promise<void> {
+  async save(file: File): Promise<void> {
     const { name, content } = file
 
-    return fs.writeFile(
+    return await fs.writeFile(
       path.join(this.folderPath, name),
       content
     )

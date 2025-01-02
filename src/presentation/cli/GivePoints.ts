@@ -1,4 +1,7 @@
-import { GivePointsToContractCreationUsecase } from '../../application/GivePointsToContractCreation/GivePointsToContractCreationUsecase'
+import {
+  GivePointsToContractCreationUsecase
+// eslint-disable-next-line max-len
+} from '../../application/GivePointsToContractCreation/GivePointsToContractCreationUsecase'
 import {
   AbsintheScoreRepository
 } from '../../infrastructure/repositories/AbsintheScoreRepository'
@@ -9,11 +12,11 @@ import {
 const chainRepository = new ViemChainRepository()
 const scoreRepository = new AbsintheScoreRepository()
 
-const hours = parseInt(process.env['HOURS_INTERVAL'] || '')
+const hours = parseInt(process.env['HOURS_INTERVAL'] ?? '')
 
 const givePointsUsecase = new GivePointsToContractCreationUsecase(
   chainRepository,
   scoreRepository
 )
 
-givePointsUsecase.execute({ hours })
+void givePointsUsecase.execute({ hours })

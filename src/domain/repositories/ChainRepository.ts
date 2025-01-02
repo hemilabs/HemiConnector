@@ -5,13 +5,18 @@ import { BlockNumber } from '../valueObjects/BlockNumber'
 import { Hash } from '../valueObjects/Hash'
 
 export interface ChainRepository {
-  getBlockNumber(): Promise<BlockNumber>
-  getBlock(blockNumber: BlockNumber, includeTransactions: boolean): Promise<Block | null>
-  getTransactionReceipt(transactionHash: Hash): Promise<TransactionReceipt | null>
-  callContractMethod(
+  getBlockNumber: () => Promise<BlockNumber>
+  getBlock: (
+    blockNumber: BlockNumber,
+    includeTransactions: boolean
+  ) => Promise<Block | null>
+  getTransactionReceipt: (
+    transactionHash: Hash
+  ) => Promise<TransactionReceipt | null>
+  callContractMethod: (
     address: Address,
     methodName: string,
-    abi: unknown, 
+    abi: unknown,
     ...inputs: any[]
-  ): Promise<unknown>
+  ) => Promise<unknown>
 }

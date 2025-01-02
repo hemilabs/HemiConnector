@@ -5,12 +5,8 @@ import { Uuid } from './Uuid'
 import { ValueObject } from '../base/ValueObject'
 
 describe('src/domain/valueObjects/Uuid', () => {
-  it('should be defined', () => {
-    expect(Uuid).toBeDefined()
-  })
-
   it('should be instance of ValueObject', () => {
-    expect(Uuid.create()).toBeInstanceOf(ValueObject)  
+    expect(Uuid.create()).toBeInstanceOf(ValueObject)
   })
 
   describe('create', () => {
@@ -19,8 +15,8 @@ describe('src/domain/valueObjects/Uuid', () => {
         const uuid = Uuid.create()
 
         expect(validate(uuid.value)).toBeTruthy()
-      });
-    });
+      })
+    })
 
     describe('when a valid id is provided', () => {
       it('should set the id as value', () => {
@@ -28,18 +24,18 @@ describe('src/domain/valueObjects/Uuid', () => {
         const uuid = Uuid.create(validId)
 
         expect(uuid.value).toEqual(validId)
-      });
-    });
+      })
+    })
 
     describe('when an invalid id is provided', () => {
       it('should set the id as value', () => {
         const invalidId = 'invalid-id'
-        const test = () => {
+        const test = (): void => {
           Uuid.create(invalidId)
         }
 
         expect(test).toThrowError(InvalidUuidError)
-      });
-    });
+      })
+    })
   })
 })

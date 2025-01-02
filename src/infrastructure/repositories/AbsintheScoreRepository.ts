@@ -1,5 +1,5 @@
-import { Score } from '../../domain/entities/Score';
-import { ScoreRepository } from '../../domain/repositories/ScoreRepository';
+import { Score } from '../../domain/entities/Score'
+import { ScoreRepository } from '../../domain/repositories/ScoreRepository'
 
 export class AbsintheScoreRepository implements ScoreRepository {
   url: string
@@ -11,18 +11,26 @@ export class AbsintheScoreRepository implements ScoreRepository {
 
     this.headers.append(
       'Authorization',
-      `Bearer ${process.env['ABSINTHE_API_KEY']}`
+      `Bearer ${process.env['ABSINTHE_API_KEY'] ?? ''}`
     )
 
     this.headers.append('Content-Type', 'application/json')
-    this.url = process.env['ABSINTHE_API_URL'] || ''
-    this.eventName =  process.env['ABSINTHE_EVENT_NAME'] || ''
+    this.url = process.env['ABSINTHE_API_URL'] ?? ''
+    this.eventName = process.env['ABSINTHE_EVENT_NAME'] ?? ''
   }
 
   async givePoints(score: Score): Promise<void> {
     const graphql = JSON.stringify({
       query: `mutation IssueOffChainPoints {
-        insert_api_points_one(object: {account_id: ${score.address.value}, identity_type: EVM_ADDRESS, amount: ${score.amount}, metadata: {transaction: ${score.hash.value}}}) {
+        insert_api_points_one(
+          object: {
+            account_id: ${score.address.value},
+            identity_type: EVM_ADDRESS,
+            amount: ${score.amount},
+            metadata: {
+              transaction: ${score.hash.value}
+            }
+          }) {
           id
           amount
           added_by
@@ -34,7 +42,7 @@ export class AbsintheScoreRepository implements ScoreRepository {
     await fetch(this.url, {
       body: graphql,
       headers: this.headers,
-      method: "POST",
+      method: 'POST'
     })
   }
 }

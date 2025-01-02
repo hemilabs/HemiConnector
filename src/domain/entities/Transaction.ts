@@ -5,7 +5,7 @@ import { Hash } from '../valueObjects/Hash'
 interface TransactionProps {
   blockHash: Hash
   from: Address
-  to?: Address | undefined 
+  to?: Address | undefined
 }
 
 export class Transaction extends EntityHash<TransactionProps> {

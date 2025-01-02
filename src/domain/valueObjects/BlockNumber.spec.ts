@@ -6,10 +6,6 @@ import { InvalidBlockNumberError } from '../errors/InvalidBlockNumberError'
 describe('src/domain/valueObjects/BlockNumber', () => {
   const validBlockNumber = BigInt(1857202)
 
-  it('should be defined', () => {
-    expect(BlockNumber).toBeDefined()
-  })
-
   it('should be an instance of ValueObject', () => {
     const blockNumber = BlockNumber.create(validBlockNumber)
 
@@ -35,7 +31,7 @@ describe('src/domain/valueObjects/BlockNumber', () => {
       expect(test).toThrowError(InvalidBlockNumberError)
     })
 
-    it('should return a new BlockNumber instance if the blockNumber is valid', () => {
+    it('should return new BlockNumber instance if blockNumber is valid', () => {
       const blockNumber = BlockNumber.create(validBlockNumber)
 
       expect(blockNumber).toBeInstanceOf(BlockNumber)

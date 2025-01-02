@@ -5,7 +5,7 @@ interface FilenameProps {
   value: string
 }
 
-const filenameRegex = /^[^.][A-z0-9\-\_\.]+[^.]$/
+const filenameRegex = /^[^.][A-Za-z0-9\-\\_\\.]+[^.]$/
 
 export class Filename extends ValueObject<FilenameProps> {
   private constructor(filename: string) {

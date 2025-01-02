@@ -8,10 +8,6 @@ describe('src/domain/valueObjects/FileContent', () => {
     test: 'value'
   })
 
-  it('should be defined', () => {
-    expect(FileContent).toBeDefined()
-  })
-
   it('should be an instance of ValueObject', () => {
     const content = FileContent.create(validFileContent)
 
@@ -36,7 +32,7 @@ describe('src/domain/valueObjects/FileContent', () => {
       expect(test).toThrowError(InvalidFileContentError)
     })
 
-    it('should return a new FileContent instance if the content is valid', () => {
+    it('should return a new FileContent instance if content is valid', () => {
       const content = FileContent.create(validFileContent)
 
       expect(content).toBeInstanceOf(FileContent)

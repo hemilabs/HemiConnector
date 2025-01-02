@@ -16,7 +16,7 @@ export class ChainMetrics extends Entity<ChainMetricsProps> {
   static create(props: ChainMetricsProps): ChainMetrics {
     return new ChainMetrics(props)
   }
-  
+
   get btcSecuredTransactions(): number {
     return this.props.btcSecuredTransactions.value
   }

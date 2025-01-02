@@ -5,7 +5,7 @@ import { BlockNumber } from '../valueObjects/BlockNumber'
 
 interface BlockProps {
   blockNumber: BlockNumber
-  transactions: Array<Transaction>
+  transactions: Transaction[]
 }
 
 export class Block extends EntityHash<BlockProps> {
@@ -17,7 +17,7 @@ export class Block extends EntityHash<BlockProps> {
     return new Block(props, hash)
   }
 
-  get transactions(): Array<Transaction> {
+  get transactions(): Transaction[] {
     return this.props.transactions
   }
 }

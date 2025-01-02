@@ -16,4 +16,4 @@ const collectChainMetricsUsecase = new CollectChainMetricsUsecase(
   fileRepository
 )
 
-collectChainMetricsUsecase.execute()
+void collectChainMetricsUsecase.execute()

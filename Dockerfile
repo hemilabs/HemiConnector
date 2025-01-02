@@ -5,9 +5,12 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
+COPY package*.json .
+
+RUN npm ci --production
+
 COPY . .
 
-RUN npm install --production
 RUN npm run build
 
 CMD [ "npm", "run", "collect-metrics"]

@@ -6,10 +6,6 @@ import { InvalidMetricError } from '../errors/InvalidMetricError'
 describe('src/domain/valueObjects/Metric', () => {
   const validMetric = 1857202
 
-  it('should be defined', () => {
-    expect(Metric).toBeDefined()
-  })
-
   it('should be an instance of ValueObject', () => {
     const metric = Metric.create(validMetric)
 

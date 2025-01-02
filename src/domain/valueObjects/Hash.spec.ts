@@ -4,11 +4,8 @@ import { ValueObject } from '../base/ValueObject'
 import { InvalidHashError } from '../errors/InvalidHashError'
 
 describe('src/domain/valueObjects/Hash', () => {
-  const validHash = '0x7304dc174aab2bc487b1befb9e35ba3632b9693f0c0548e138b4401f263910f1'
-
-  it('should be defined', () => {
-    expect(Hash).toBeDefined()
-  })
+  const validHash =
+    '0x7304dc174aab2bc487b1befb9e35ba3632b9693f0c0548e138b4401f263910f1'
 
   it('should be an instance of ValueObject', () => {
     const hash = Hash.create(validHash)
