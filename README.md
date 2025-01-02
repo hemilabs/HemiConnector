@@ -78,6 +78,7 @@ The environment variables are defined in the `.env` file. The following variable
 - `ABSINTHE_EVENT_NAME`: The Absinthe Event Name to send in the points requests
 - `TESTNET`: Boolean value to set if the scripts should run on testnet or no
 - `HOURS_INTERVAL`: Interval in hours to search for blocks/transactions that have smart contracts creation
+- `METRICS_FILE_PATH`: Path of the Website metrics file (e.g. `/usr/src/app/metrics.json`).
 
 Example of the .env file
 
@@ -87,6 +88,7 @@ ABSINTHE_API_KEY=
 ABSINTHE_EVENT_NAME=
 TESTNET=
 HOURS_INTERVAL=
+METRICS_FILE_PATH=
 ```
 
 ## Contribution
