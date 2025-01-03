@@ -26,7 +26,8 @@ const execute = async (): Promise<void> => {
     const totalTransactions = parseInt(stats.total_transactions)
     const content = JSON.stringify({
       'btc-transactions': totalTransactions.toString(),
-      'latest-keystone': blockNumber.toString()
+      'latest-keystone': blockNumber.toString(),
+      timestamp: new Date().getTime()
     })
 
     console.info('Hemi Connector | Creating metrics file')
