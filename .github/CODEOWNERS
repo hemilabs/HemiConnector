@@ -1,1 +1,5 @@
 * @alvarengathomas @gabmontes
+
+# Deployment files
+/stats-api-nginx.conf @hemilabs/devops
+/stats-api.Dockerfile @hemilabs/devops
