@@ -1,0 +1,81 @@
+# GitHub Actions workflow to build and push Docker images.
+name: "Docker"
+on:
+  push:
+    tags: [ "v*.*.*" ]
+
+concurrency:
+  group: "docker-${{ github.event.number || github.ref }}"
+  cancel-in-progress: false
+
+jobs:
+  # Prepare to deploy and release
+  prepare:
+    name: "Prepare"
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+    outputs:
+      version: "${{ steps.data.outputs.version }}"
+      tag: "${{ steps.data.outputs.tag }}"
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: "Retrieve build data"
+        id: "data"
+        env:
+          RAW_VERSION: "${{ github.ref_name }}"
+        run: |
+          VERSION=$(echo "$RAW_VERSION" | sed -e 's/^v//')
+          TAG=$(echo "$RAW_VERSION" | sed -E 's/^([^v])/v\1/g')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+  # Build and push Docker image
+  docker:
+    name: "Docker (hemiconnector)"
+    uses: hemilabs/actions/.github/workflows/docker.yml@main
+    needs: [ "prepare" ]
+    permissions:
+      contents: read
+      packages: write # Needed to push to the GitHub Container Registry
+    with:
+      version: "${{ needs.prepare.outputs.version }}"
+      context: "."
+      file: "./Dockerfile"
+      dockerhub: true
+      tags: |
+        hemilabs/hemiconnector:latest
+        hemilabs/hemiconnector:${{ needs.prepare.outputs.tag }}
+        hemilabs/hemiconnector:${{ github.sha }}
+        ghcr.io/hemilabs/hemiconnector:latest
+        ghcr.io/hemilabs/hemiconnector:${{ needs.prepare.outputs.tag }}
+        ghcr.io/hemilabs/hemiconnector:${{ github.sha }}
+    secrets:
+      DOCKERHUB_USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
+      DOCKERHUB_PASSWORD: "${{ secrets.DOCKERHUB_TOKEN }}"
+
+  # Build and push stats-api (nginx) Docker image.
+  docker-stats-api:
+    name: "Docker (hemiconnector-stats-api)"
+    uses: hemilabs/actions/.github/workflows/docker.yml@main
+    needs: [ "prepare" ]
+    permissions:
+      contents: read
+      packages: write # Needed to push to the GitHub Container Registry
+    with:
+      version: "${{ needs.prepare.outputs.version }}"
+      context: "."
+      file: "./stats-api.Dockerfile"
+      dockerhub: true
+      tags: |
+        hemilabs/hemiconnector-stats-api:latest
+        hemilabs/hemiconnector-stats-api:${{ needs.prepare.outputs.tag }}
+        hemilabs/hemiconnector-stats-api:${{ github.sha }}
+        ghcr.io/hemilabs/hemiconnector-stats-api:latest
+        ghcr.io/hemilabs/hemiconnector-stats-api:${{ needs.prepare.outputs.tag }}
+        ghcr.io/hemilabs/hemiconnector-stats-api:${{ github.sha }}
+    secrets:
+      DOCKERHUB_USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
+      DOCKERHUB_PASSWORD: "${{ secrets.DOCKERHUB_TOKEN }}"
