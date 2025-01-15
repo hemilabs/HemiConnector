@@ -35,7 +35,7 @@ jobs:
   # Build and push Docker image
   docker:
     name: "Docker (hemiconnector)"
-    uses: hemilabs/actions/.github/workflows/docker.yml@main
+    uses: hemilabs/actions/.github/workflows/docker.yml@01a748b9e1b966ae64d2a7b146ff7e4700dc1da5
     needs: [ "prepare" ]
     permissions:
       contents: read
@@ -59,7 +59,7 @@ jobs:
   # Build and push stats-api (nginx) Docker image.
   docker-stats-api:
     name: "Docker (hemiconnector-stats-api)"
-    uses: hemilabs/actions/.github/workflows/docker.yml@main
+    uses: hemilabs/actions/.github/workflows/docker.yml@01a748b9e1b966ae64d2a7b146ff7e4700dc1da5
     needs: [ "prepare" ]
     permissions:
       contents: read
