@@ -2,21 +2,20 @@
   "name": "hemiconnector",
   "version": "1.0.0",
   "description": "Application to connect Hemi Network to External Services",
+  "license": "MIT",
+  "author": "Thomas Alvarenga <thomas@hemi.xyz>",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "collect-metrics": "node dist/presentation/cli/CollectMetrics.js",
     "give-points": "node ./src/presentation/cli/GivePoints.ts",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
+    "prepare": "husky",
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "test:watch": "vitest watch"
   },
-  "author": "Thomas Alvarenga <thomas@hemi.xyz>",
-  "license": "MIT",
   "dependencies": {
     "hemi-viem": "1.7.0",
     "typescript": "5.6.3",
@@ -26,12 +25,17 @@
     "@types/node": "18.19.62",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@vitest/coverage-c8": "0.23.4",
+    "better-sort-package-json": "1.1.1",
     "eslint": "8.57.1",
     "eslint-config-standard-with-typescript": "22.0.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-n": "15.7.0",
     "eslint-plugin-promise": "6.6.0",
     "eslint-plugin-sonarjs": "0.15.0",
-     "vitest": "0.23.4"
-  }
+    "husky": "9.1.7",
+    "lint-staged": "15.5.0",
+    "vitest": "0.23.4"
+  },
+  "private": true,
+  "types": "dist/index.d.ts"
 }
