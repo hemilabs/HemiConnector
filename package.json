@@ -1,7 +1,7 @@
 {
   "name": "hemiconnector",
   "version": "1.0.0",
-  "description": "Application to connect Hemi Network to External Services",
+  "description": "Application to connect Hemi to External Services",
   "license": "MIT",
   "author": "Thomas Alvarenga <thomas@hemi.xyz>",
   "main": "dist/index.js",
