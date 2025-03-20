@@ -15,7 +15,7 @@ export class Score extends Entity<ScoreProps> {
   static create(props: ScoreProps, hash: Hash): Score {
     return new Score(props, hash)
   }
-  
+
   get address(): Address {
     return this.address
   }

@@ -5,11 +5,11 @@ import {
   PublicClient,
   Block as ViemBlock,
   Transaction as ViemTransaction,
-  TransactionReceipt as ViemTransactionReceipt,
-} from "viem"
-// @ts-ignore
-import { hemiSepolia, hemi } from "hemi-viem"
-// @ts-ignore
+  TransactionReceipt as ViemTransactionReceipt
+} from 'viem'
+// @ts-expect-error
+import { hemiSepolia, hemi } from 'hemi-viem'
+// @ts-expect-error
 import { Hash } from '../../domain/valueObjects/Hash'
 import { Address } from '../../domain/valueObjects/Address'
 import { Transaction } from '../../domain/entities/Transaction'
@@ -18,10 +18,10 @@ import { Block } from '../../domain/entities/Block'
 import { TransactionReceipt } from '../../domain/entities/TransactionReceipt'
 
 export class ViemChainRepository implements ChainRepository {
-  private client: PublicClient
+  private readonly client: PublicClient
 
   constructor() {
-    const chain = !!process.env['TESTNET'] ? hemiSepolia : hemi
+    const chain = process.env['TESTNET'] ? hemiSepolia : hemi
     // @ts-expect-error
     this.client = createPublicClient({ chain, transport: http() })
   }
@@ -29,11 +29,14 @@ export class ViemChainRepository implements ChainRepository {
   async getBlockNumber(): Promise<BlockNumber> {
     const blockNumber = await this.client.getBlockNumber()
 
+    // eslint-disable-next-line no-console
     console.log(`VIEM blockNumber: ${blockNumber}`)
     return BlockNumber.create(blockNumber)
   }
 
-  async getBlock(blockNumber: BlockNumber, includeTransactions: boolean): Promise<Block | null> {
+  async getBlock(
+    blockNumber: BlockNumber, includeTransactions: boolean
+  ): Promise<Block | null> {
     const block = await this.client.getBlock({
       blockNumber: blockNumber.value,
       includeTransactions
@@ -42,11 +45,12 @@ export class ViemChainRepository implements ChainRepository {
     return this.getEntityFromBlock(block)
   }
 
-  async getTransactionReceipt(transactionHash: Hash): Promise<TransactionReceipt | null> {
+  async getTransactionReceipt(
+    transactionHash: Hash
+  ): Promise<TransactionReceipt | null> {
     const receipt = await this.client
-      // @ts-ignore
+      // @ts-expect-error
       .getTransactionReceipt({ hash: transactionHash.value })
-
 
     if (receipt.contractAddress) {
       return this.getEntityFromTransactionReceipt(receipt)
@@ -55,10 +59,11 @@ export class ViemChainRepository implements ChainRepository {
     return this.getEntityFromTransactionReceipt(receipt)
   }
 
+  // eslint-disable-next-line max-params
   async callContractMethod(
     address: Address,
     methodName: string,
-    abi: unknown, 
+    abi: unknown,
     ...inputs: any[]
   ): Promise<unknown> {
     return await this.client.readContract({
@@ -71,13 +76,20 @@ export class ViemChainRepository implements ChainRepository {
     })
   }
 
-  async listContractCreationTransactionsByHour(hours: number): Promise<Transaction[]> {
-    const result: Array<Transaction> = []
-    const blockDiff = BigInt((hours * 60 * 60) / 12) // X hours worth of Hemi blocks
+  async listContractCreationTransactionsByHour(
+    hours: number
+  ): Promise<Transaction[]> {
+    const result: Transaction[] = []
+    const blockDiff =
+      BigInt((hours * 60 * 60) / 12) // X hours worth of Hemi blocks
     const toBlock = await this.client.getBlockNumber()
     const fromBlock = toBlock - blockDiff
 
-    for (let currentBlock = fromBlock; currentBlock <= toBlock; currentBlock += 1n) {
+    for (
+      let currentBlock = fromBlock;
+      currentBlock <= toBlock;
+      currentBlock += 1n
+    ) {
       const blockTransactions =
         await this.getContractCreationTransactionsByBlock(currentBlock)
 
@@ -87,32 +99,33 @@ export class ViemChainRepository implements ChainRepository {
 
         result.push(...transactions)
       }
-
     }
 
     return result
   }
 
-  private async getContractCreationTransactionsByBlock(blockNumber: bigint) {
+  private async getContractCreationTransactionsByBlock(
+    blockNumber: bigint
+  ): Promise<Block> {
     const block = await this.client.getBlock({
       blockNumber,
       includeTransactions: true
-    });
+    })
 
     return block.transactions.filter(t => t.to == null)
   }
 
   private getEntityFromBlock(block: ViemBlock): Block {
     let transactions: Transaction[] = []
-    
+
     if (block.transactions.length > 0) {
       transactions = block.transactions
-      // @ts-ignore
+      // @ts-expect-error
         .map(t => this.getEntityFromTransaction(t))
     }
 
     return Block.create({
-      // @ts-ignore
+      // @ts-expect-error
       blockNumber: BlockNumber.create(block.number),
       transactions
     }, Hash.create(block.hash as string))
@@ -121,7 +134,7 @@ export class ViemChainRepository implements ChainRepository {
   private getEntityFromTransaction(
     transaction: ViemTransaction
   ): Transaction {
-    const to = transaction.to 
+    const to = transaction.to
       ? Address.create(transaction.to as string)
       : undefined
 
@@ -139,4 +152,4 @@ export class ViemChainRepository implements ChainRepository {
       contractAddress: Address.create(receipt.contractAddress as string)
     }, Hash.create(receipt.transactionHash))
   }
-} 
+}

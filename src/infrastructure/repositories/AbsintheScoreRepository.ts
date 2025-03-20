@@ -1,5 +1,6 @@
-import { Score } from '../../domain/entities/Score';
-import { ScoreRepository } from '../../domain/repositories/ScoreRepository';
+/* eslint-disable max-len */
+import { Score } from '../../domain/entities/Score'
+import { ScoreRepository } from '../../domain/repositories/ScoreRepository'
 
 export class AbsintheScoreRepository implements ScoreRepository {
   url: string
@@ -11,12 +12,12 @@ export class AbsintheScoreRepository implements ScoreRepository {
 
     this.headers.append(
       'Authorization',
-      `Bearer ${process.env['ABSINTHE_API_KEY']}`
+      `Bearer ${process.env['ABSINTHE_API_KEY'] ?? ''}`
     )
 
     this.headers.append('Content-Type', 'application/json')
-    this.url = process.env['ABSINTHE_API_URL'] || ''
-    this.eventName =  process.env['ABSINTHE_EVENT_NAME'] || ''
+    this.url = process.env['ABSINTHE_API_URL'] ?? ''
+    this.eventName = process.env['ABSINTHE_EVENT_NAME'] ?? ''
   }
 
   async givePoints(score: Score): Promise<void> {
@@ -34,7 +35,7 @@ export class AbsintheScoreRepository implements ScoreRepository {
     await fetch(this.url, {
       body: graphql,
       headers: this.headers,
-      method: "POST",
+      method: 'POST'
     })
   }
 }
