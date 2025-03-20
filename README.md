@@ -1,6 +1,6 @@
 # Hemi Connector
 
-Hemi Connector was developed using Domain-Driven Design (DDD) principles to facilitate interaction with the Hemi network and external services. This document provides instructions for setting up, running, and contributing to the project.
+Hemi Connector was developed using Domain-Driven Design (DDD) principles to facilitate interaction with Hemi and external services. This document provides instructions for setting up, running, and contributing to the project.
 
 ## Architecture
 
