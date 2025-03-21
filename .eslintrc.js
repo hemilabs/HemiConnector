@@ -5,8 +5,8 @@ module.exports = {
   },
   extends: [
     'bloq',
-    'prettier',
-    'standard-with-typescript'
+    'standard-with-typescript',
+    'prettier'
   ],
   overrides: [
     {
