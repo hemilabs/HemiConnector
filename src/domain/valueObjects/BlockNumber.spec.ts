@@ -35,11 +35,12 @@ describe('src/domain/valueObjects/BlockNumber', () => {
       expect(test).toThrowError(InvalidBlockNumberError)
     })
 
-    it('should return a new BlockNumber instance if the blockNumber is valid', () => {
-      const blockNumber = BlockNumber.create(validBlockNumber)
+    it('should return a new BlockNumber instance if the blockNumber is valid',
+      () => {
+        const blockNumber = BlockNumber.create(validBlockNumber)
 
-      expect(blockNumber).toBeInstanceOf(BlockNumber)
-    })
+        expect(blockNumber).toBeInstanceOf(BlockNumber)
+      })
 
     it('should set the blockNumber in the value property', () => {
       const expectedBlockNumber = validBlockNumber

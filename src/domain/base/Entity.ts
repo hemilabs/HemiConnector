@@ -1,5 +1,5 @@
 import { Hash } from '../valueObjects/Hash'
-import { ValueObject } from "./ValueObject"
+import { ValueObject } from './ValueObject'
 
 export class Entity<T> extends ValueObject<T> {
   hash: Hash

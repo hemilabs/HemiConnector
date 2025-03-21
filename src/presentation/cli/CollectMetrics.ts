@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { promises as fs } from 'fs'
 import {
   createPublicClient,
@@ -11,6 +12,7 @@ const filePath = process.env['METRICS_FILE_PATH'] ?? ''
 const client = createPublicClient({ chain, transport: http() })
 const blockExplorerUrl = chain.blockExplorers.default.url
 
+// eslint-disable-next-line arrow-body-style
 const execute = async (): Promise<void> => {
   console.info('Hemi Connector | Collecting chain metrics...')
 

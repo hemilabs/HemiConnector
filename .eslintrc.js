@@ -3,43 +3,58 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: 'standard-with-typescript',
+  extends: [
+    'bloq',
+    'standard-with-typescript',
+    'prettier'
+  ],
   overrides: [
     {
       files: ['*.spec.ts'],
       rules: {
-        'max-statements': ['error', 20],
-        'max-nested-callbacks': ['error', 5],
-        'max-lines-per-function': 'off',
+        'arrow-body-style': 'off',
         'max-lines': ['error', {
           max: 300,
           skipBlankLines: true,
           skipComments: true
-        }]
+        }],
+        'max-lines-per-function': 'off',
+        'max-nested-callbacks': ['error', 5],
+        'max-statements': ['error', 20]
       }
     }
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
     project: ['tsconfig.json'],
+    sourceType: 'module',
     tsconfigRootDir: __dirname
   },
   plugins: [
     'sonarjs'
   ],
   rules: {
-    '@typescript-eslint/triple-slash-reference': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/triple-slash-reference': 'off',
+    'class-methods-use-this': 'off',
+    complexity: ['error', 4],
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     indent: ['error', 2],
-    'class-methods-use-this': 'off',
-    complexity: ['error', 4],
-    'sonarjs/cognitive-complexity': ['error', 4],
+    'lines-between-class-members': [
+      'error',
+      'always',
+      {
+        exceptAfterSingleLine: true
+      }
+    ],
+    'max-classes-per-file': 'off',
     'max-depth': ['error', 3],
-    'max-statements': ['error', 10],
+    'max-len': ['error', {
+      code: 80
+    }],
     'max-lines': ['error', {
       max: 130,
       skipBlankLines: true,
@@ -52,19 +67,9 @@ module.exports = {
     }],
     'max-nested-callbacks': ['error', 3],
     'max-params': ['error', 3],
-    'no-useless-constructor': 'off',
-    'max-classes-per-file': 'off',
-    'lines-between-class-members': [
-      'error',
-      'always',
-      {
-        exceptAfterSingleLine: true
-      }
-    ],
+    'max-statements': ['error', 10],
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    'max-len': ['error', {
-      code: 80
-    }]
+    'no-useless-constructor': 'off',
+    'sonarjs/cognitive-complexity': ['error', 4]
   }
 }
