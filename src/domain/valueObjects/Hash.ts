@@ -12,8 +12,7 @@ export class Hash extends ValueObject<HashProps> {
   }
 
   static create(hash: string): Hash {
-    if (typeof hash !== 'string' ||
-        !isHash(hash)) {
+    if (!isHash(hash)) {
       throw new InvalidHashError()
     }
 
